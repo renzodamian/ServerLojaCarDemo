@@ -80,7 +80,6 @@ public class Vehiculo {
 
 	public Vehiculo(long idvehiculo, String marca, String modelo, String anio, String cilindraje,
 			TipoProducto tpproductovehiculo) {
-		super();
 		this.idvehiculo = idvehiculo;
 		this.marca = marca;
 		this.modelo = modelo;
@@ -90,7 +89,6 @@ public class Vehiculo {
 	}
 
 	public Vehiculo() {
-		super();
 	}
 
 	@Override

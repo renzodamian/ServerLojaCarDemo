@@ -3,10 +3,11 @@ package com.rdjaramillo.core.Convertidor;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Component;
+
 import com.rdjaramillo.core.Entity.Vehiculo;
 import com.rdjaramillo.core.Model.*;
 
-@Component("convertidor")
+@Component("convertidorvehiculo")
 public class Convertidor {
 
 	public List<MVehiculo> convertirLista(List<Vehiculo> vehiculos){
@@ -14,7 +15,8 @@ public class Convertidor {
 		for (Vehiculo vehiculo :vehiculos ){
 			mvehiculos.add(new MVehiculo(vehiculo));
 		}
-		return mvehiculos;
-	
+		return mvehiculos;	
 	}
+
+	
 }

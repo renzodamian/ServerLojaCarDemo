@@ -11,8 +11,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="repuestos")
-public class Repuestos implements Serializable {
+@Table(name="repuesto")
+public class Repuesto implements Serializable {
 
 	/**
 	 * 
@@ -22,8 +22,8 @@ public class Repuestos implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private long idrepuesto;
 	
-	@Column(name="repuesto", length=350)
-	private String repuesto;
+	@Column(name="nombrerepuesto", length=350)
+	private String nombrerepuesto;
 	
 	@OneToOne
 	private TipoProducto tpproductorepuestos;
@@ -36,13 +36,14 @@ public class Repuestos implements Serializable {
 		this.idrepuesto = idrepuesto;
 	}
 
-	public String getRepuesto() {
-		return repuesto;
+	public String getNombrerepuesto() {
+		return nombrerepuesto;
 	}
 
-	public void setRepuesto(String repuesto) {
-		this.repuesto = repuesto;
+	public void setNombrerepuesto(String nombrerepuesto) {
+		this.nombrerepuesto = nombrerepuesto;
 	}
+
 
 	public TipoProducto getTpproductorepuestos() {
 		return tpproductorepuestos;
@@ -56,20 +57,19 @@ public class Repuestos implements Serializable {
 		return serialVersionUID;
 	}
 
-	public Repuestos(long idrepuesto, String repuesto, TipoProducto tpproductorepuestos) {
-		super();
-		this.idrepuesto = idrepuesto;
-		this.repuesto = repuesto;
-		this.tpproductorepuestos = tpproductorepuestos;
-	}
+	
 
-	public Repuestos() {
-		super();
+	public Repuesto() {	}
+
+	public Repuesto(long idrepuesto, String nombrerepuesto, TipoProducto tpproductorepuestos) {
+		this.idrepuesto = idrepuesto;
+		this.nombrerepuesto = nombrerepuesto;
+		this.tpproductorepuestos = tpproductorepuestos;
 	}
 
 	@Override
 	public String toString() {
-		return "Repuestos [idrepuesto=" + idrepuesto + ", repuesto=" + repuesto + ", tpproductorepuestos="
+		return "Repuestos [idrepuesto=" + idrepuesto + ", nombrerepuesto=" + nombrerepuesto + ", tpproductorepuestos="
 				+ tpproductorepuestos + "]";
 	}
 
@@ -78,7 +78,7 @@ public class Repuestos implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + (int) (idrepuesto ^ (idrepuesto >>> 32));
-		result = prime * result + ((repuesto == null) ? 0 : repuesto.hashCode());
+		result = prime * result + ((nombrerepuesto == null) ? 0 : nombrerepuesto.hashCode());
 		result = prime * result + ((tpproductorepuestos == null) ? 0 : tpproductorepuestos.hashCode());
 		return result;
 	}
@@ -91,13 +91,13 @@ public class Repuestos implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Repuestos other = (Repuestos) obj;
+		Repuesto other = (Repuesto) obj;
 		if (idrepuesto != other.idrepuesto)
 			return false;
-		if (repuesto == null) {
-			if (other.repuesto != null)
+		if (nombrerepuesto == null) {
+			if (other.nombrerepuesto != null)
 				return false;
-		} else if (!repuesto.equals(other.repuesto))
+		} else if (!nombrerepuesto.equals(other.nombrerepuesto))
 			return false;
 		if (tpproductorepuestos == null) {
 			if (other.tpproductorepuestos != null)
@@ -106,11 +106,6 @@ public class Repuestos implements Serializable {
 			return false;
 		return true;
 	}
-
-	
-	
-	
-	
-	
+		
 	
 }

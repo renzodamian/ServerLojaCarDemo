@@ -1,7 +1,5 @@
 package com.rdjaramillo.core.Controller;
 
-
-
 import java.util.List;
 
 import javax.validation.Valid;
@@ -17,36 +15,41 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rdjaramillo.core.Entity.Repuesto;
 import com.rdjaramillo.core.Entity.Vehiculo;
+import com.rdjaramillo.core.Model.MRepuesto;
 import com.rdjaramillo.core.Model.MVehiculo;
-import com.rdjaramillo.core.Service.VehiculoService;
+import com.rdjaramillo.core.Service.RepuestoService;
 
 @RestController
 @RequestMapping("/v1")
-public class VehiculoController {
-		
-	@Autowired
-	@Qualifier("serviciovehiculo")
-	VehiculoService serviciovehiculo;
+public class RepuestoController {
 	
-	@PutMapping("/apivehiculo")
-	public boolean agregarvehiculo(@RequestBody @Valid Vehiculo vehiculo) {
-		return serviciovehiculo.crear(vehiculo);
+	@Autowired
+	@Qualifier("serviciorepuesto")
+	RepuestoService serviciorepuesto;
+	
+	
+	@PutMapping("/apirepuesto")
+	public boolean agregarrepuesto(@RequestBody @Valid Repuesto repuesto) {
+		return serviciorepuesto.crear(repuesto);
 
 	}
-	@PostMapping("/apivehiculo")
-	public boolean actualizarvehiculo(@RequestBody @Valid Vehiculo vehiculo) {
-	return serviciovehiculo.actualziar(vehiculo);
+	@PostMapping("/apirepuesto")
+	public boolean actualizarrepuesto(@RequestBody @Valid Repuesto repuesto) {
+	return serviciorepuesto.actualziar(repuesto);
 	}
 	
-	@DeleteMapping("/apivehiculo/{modelo}/{idvehiculo}")
-	public boolean borrarvehiculo(@PathVariable("modelo") String modelo,
-							@PathVariable("idvehiculo") long idvehiculo) {
-	return serviciovehiculo.borrar(modelo, idvehiculo);
+	
+	@DeleteMapping("/apirepuesto/{idrepuesto}")
+	public boolean borrarrepuesto(@PathVariable("idrepuesto") long idrepuesto) {
+			return serviciorepuesto.borrar(idrepuesto);
 	}
 	
-	@GetMapping("/apivehiculos")
-	public List<MVehiculo> obtenerVehiculos(){
-		return serviciovehiculo.obtener();
+	
+	@GetMapping("/apirepuestos")
+	public List<MRepuesto> obtenerRepuestos(){
+		return serviciorepuesto.obtener();
 	}
+
 }

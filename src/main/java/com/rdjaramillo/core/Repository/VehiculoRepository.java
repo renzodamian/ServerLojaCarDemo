@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.rdjaramillo.core.Entity.Vehiculo;
-@Repository("repositorio")
+@Repository("repositoriovehiculo")
 public interface VehiculoRepository  extends JpaRepository<Vehiculo, Serializable>{
 
 	public abstract Vehiculo findByMarca(String marca);

@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rdjaramillo.core.Entity.Repuesto;
-import com.rdjaramillo.core.Entity.Vehiculo;
 import com.rdjaramillo.core.Model.MRepuesto;
-import com.rdjaramillo.core.Model.MVehiculo;
 import com.rdjaramillo.core.Service.RepuestoService;
 
 @RestController

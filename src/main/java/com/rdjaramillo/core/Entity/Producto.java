@@ -3,6 +3,7 @@ package com.rdjaramillo.core.Entity;
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -25,10 +26,17 @@ public class Producto implements Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private long idproducto;
 	
-	
+	@Column(name="nombreproducto", length=350)
+	private String nombreproducto;
+	/*
 	@OneToOne
 	private TipoProducto fktpproducto;
+	*/
+	@OneToOne
+	private Vehiculo fkvehiculoproducto;
 	
+	@OneToOne
+	private Repuesto fkrepuestoproducto;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "fkcliente", targetEntity = PedidoCliente.class)
 	private PedidoCliente  pedidocliente;
@@ -44,12 +52,29 @@ public class Producto implements Serializable{
 		this.idproducto = idproducto;
 	}
 
-	public TipoProducto getFktpproducto() {
-		return fktpproducto;
+	
+	public String getNombreproducto() {
+		return nombreproducto;
 	}
 
-	public void setFktpproducto(TipoProducto fktpproducto) {
-		this.fktpproducto = fktpproducto;
+	public void setNombreproducto(String nombreproducto) {
+		this.nombreproducto = nombreproducto;
+	}
+
+	public Vehiculo getFkvehiculoproducto() {
+		return fkvehiculoproducto;
+	}
+
+	public void setFkvehiculoproducto(Vehiculo fkvehiculoproducto) {
+		this.fkvehiculoproducto = fkvehiculoproducto;
+	}
+
+	public Repuesto getFkrepuestoproducto() {
+		return fkrepuestoproducto;
+	}
+
+	public void setFkrepuestoproducto(Repuesto fkrepuestoproducto) {
+		this.fkrepuestoproducto = fkrepuestoproducto;
 	}
 
 	public PedidoCliente getPedidocliente() {
@@ -72,23 +97,11 @@ public class Producto implements Serializable{
 		return serialVersionUID;
 	}
 
-	public Producto(long idproducto, TipoProducto fktpproducto, PedidoCliente pedidocliente,
-			Consecionario fkconsecionario) {
-		super();
-		this.idproducto = idproducto;
-		this.fktpproducto = fktpproducto;
-		this.pedidocliente = pedidocliente;
-		this.fkconsecionario = fkconsecionario;
-	}
-
-	public Producto() {
-		super();
-	}
-
 	@Override
 	public String toString() {
-		return "Producto [idproducto=" + idproducto + ", fktpproducto=" + fktpproducto + ", pedidocliente="
-				+ pedidocliente + ", fkconsecionario=" + fkconsecionario + "]";
+		return "Producto [idproducto=" + idproducto + ", nombreproducto=" + nombreproducto + ", fkvehiculoproducto="
+				+ fkvehiculoproducto + ", fkrepuestoproducto=" + fkrepuestoproducto + ", pedidocliente=" + pedidocliente
+				+ ", fkconsecionario=" + fkconsecionario + "]";
 	}
 
 	@Override
@@ -96,8 +109,10 @@ public class Producto implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((fkconsecionario == null) ? 0 : fkconsecionario.hashCode());
-		result = prime * result + ((fktpproducto == null) ? 0 : fktpproducto.hashCode());
+		result = prime * result + ((fkrepuestoproducto == null) ? 0 : fkrepuestoproducto.hashCode());
+		result = prime * result + ((fkvehiculoproducto == null) ? 0 : fkvehiculoproducto.hashCode());
 		result = prime * result + (int) (idproducto ^ (idproducto >>> 32));
+		result = prime * result + ((nombreproducto == null) ? 0 : nombreproducto.hashCode());
 		result = prime * result + ((pedidocliente == null) ? 0 : pedidocliente.hashCode());
 		return result;
 	}
@@ -116,12 +131,22 @@ public class Producto implements Serializable{
 				return false;
 		} else if (!fkconsecionario.equals(other.fkconsecionario))
 			return false;
-		if (fktpproducto == null) {
-			if (other.fktpproducto != null)
+		if (fkrepuestoproducto == null) {
+			if (other.fkrepuestoproducto != null)
 				return false;
-		} else if (!fktpproducto.equals(other.fktpproducto))
+		} else if (!fkrepuestoproducto.equals(other.fkrepuestoproducto))
+			return false;
+		if (fkvehiculoproducto == null) {
+			if (other.fkvehiculoproducto != null)
+				return false;
+		} else if (!fkvehiculoproducto.equals(other.fkvehiculoproducto))
 			return false;
 		if (idproducto != other.idproducto)
+			return false;
+		if (nombreproducto == null) {
+			if (other.nombreproducto != null)
+				return false;
+		} else if (!nombreproducto.equals(other.nombreproducto))
 			return false;
 		if (pedidocliente == null) {
 			if (other.pedidocliente != null)
@@ -130,8 +155,19 @@ public class Producto implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
+
+	public Producto(long idproducto, String nombreproducto, Vehiculo fkvehiculoproducto, Repuesto fkrepuestoproducto,
+			PedidoCliente pedidocliente, Consecionario fkconsecionario) {
+		this.idproducto = idproducto;
+		this.nombreproducto = nombreproducto;
+		this.fkvehiculoproducto = fkvehiculoproducto;
+		this.fkrepuestoproducto = fkrepuestoproducto;
+		this.pedidocliente = pedidocliente;
+		this.fkconsecionario = fkconsecionario;
+	}
+
+	public Producto() {}
+
 	
 
 }

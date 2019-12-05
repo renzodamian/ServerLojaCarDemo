@@ -25,8 +25,8 @@ public class TipoProducto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private long idtipoproducto;
 	
-	@Column(name="tipoproducto", length=350)
-	private String tipoproducto;
+	@Column(name="nombretipoproducto", length=350)
+	private String nombretipoproducto;
 	
 		
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "tpproductorepuestos", targetEntity = Repuesto.class)
@@ -35,8 +35,8 @@ public class TipoProducto implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "tpproductovehiculo", targetEntity = Vehiculo.class)
 	private Vehiculo vehiculo;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "fktpproducto", targetEntity = Producto.class)
-	private Producto producto;
+	/*@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "fktpproducto", targetEntity = Producto.class)
+	private Producto producto;*/
 
 	public long getIdtipoproducto() {
 		return idtipoproducto;
@@ -46,19 +46,22 @@ public class TipoProducto implements Serializable {
 		this.idtipoproducto = idtipoproducto;
 	}
 
-	public String getTipoproducto() {
-		return tipoproducto;
+	
+
+	public String getNombretipoproducto() {
+		return nombretipoproducto;
 	}
 
-	public void setTipoproducto(String tipoproducto) {
-		this.tipoproducto = tipoproducto;
+	public void setNombretipoproducto(String nombretipoproducto) {
+		this.nombretipoproducto = nombretipoproducto;
 	}
 
-	public Repuesto getRepuestos() {
+	
+	public Repuesto getRepuesto() {
 		return repuesto;
 	}
 
-	public void setRepuestos(Repuesto repuesto) {
+	public void setRepuesto(Repuesto repuesto) {
 		this.repuesto = repuesto;
 	}
 
@@ -70,36 +73,33 @@ public class TipoProducto implements Serializable {
 		this.vehiculo = vehiculo;
 	}
 
-	public Producto getProducto() {
+	/*public Producto getProducto() {
 		return producto;
 	}
 
 	public void setProducto(Producto producto) {
 		this.producto = producto;
-	}
+	}*/
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-	public TipoProducto(long idtipoproducto, String tipoproducto, Repuesto repuesto, Vehiculo vehiculo,
-			Producto producto) {
+	
+	public TipoProducto() {}
+
+	public TipoProducto(long idtipoproducto, String nombretipoproducto, Repuesto repuesto, Vehiculo vehiculo) {
 		super();
 		this.idtipoproducto = idtipoproducto;
-		this.tipoproducto = tipoproducto;
+		this.nombretipoproducto = nombretipoproducto;
 		this.repuesto = repuesto;
 		this.vehiculo = vehiculo;
-		this.producto = producto;
-	}
-
-	public TipoProducto() {
-		super();
 	}
 
 	@Override
 	public String toString() {
-		return "TipoProducto [idtipoproducto=" + idtipoproducto + ", tipoproducto=" + tipoproducto + ", repuestos="
-				+ repuesto + ", vehiculo=" + vehiculo + ", producto=" + producto + "]";
+		return "TipoProducto [idtipoproducto=" + idtipoproducto + ", nombretipoproducto=" + nombretipoproducto
+				+ ", repuesto=" + repuesto + ", vehiculo=" + vehiculo + "]";
 	}
 
 	@Override
@@ -107,9 +107,8 @@ public class TipoProducto implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + (int) (idtipoproducto ^ (idtipoproducto >>> 32));
-		result = prime * result + ((producto == null) ? 0 : producto.hashCode());
+		result = prime * result + ((nombretipoproducto == null) ? 0 : nombretipoproducto.hashCode());
 		result = prime * result + ((repuesto == null) ? 0 : repuesto.hashCode());
-		result = prime * result + ((tipoproducto == null) ? 0 : tipoproducto.hashCode());
 		result = prime * result + ((vehiculo == null) ? 0 : vehiculo.hashCode());
 		return result;
 	}
@@ -125,20 +124,15 @@ public class TipoProducto implements Serializable {
 		TipoProducto other = (TipoProducto) obj;
 		if (idtipoproducto != other.idtipoproducto)
 			return false;
-		if (producto == null) {
-			if (other.producto != null)
+		if (nombretipoproducto == null) {
+			if (other.nombretipoproducto != null)
 				return false;
-		} else if (!producto.equals(other.producto))
+		} else if (!nombretipoproducto.equals(other.nombretipoproducto))
 			return false;
 		if (repuesto == null) {
 			if (other.repuesto != null)
 				return false;
 		} else if (!repuesto.equals(other.repuesto))
-			return false;
-		if (tipoproducto == null) {
-			if (other.tipoproducto != null)
-				return false;
-		} else if (!tipoproducto.equals(other.tipoproducto))
 			return false;
 		if (vehiculo == null) {
 			if (other.vehiculo != null)
@@ -147,9 +141,7 @@ public class TipoProducto implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
+
 	
 
 }

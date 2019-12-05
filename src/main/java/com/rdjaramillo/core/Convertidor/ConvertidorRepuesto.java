@@ -10,6 +10,7 @@ import com.rdjaramillo.core.Model.*;
 
 @Component("convertidorrespuesto")
 public class ConvertidorRepuesto {
+	
 	public List<MRepuesto> convertirListaRepuesto(List<Repuesto> repuestos) {
 		List<MRepuesto> mrepuestos = new ArrayList<>();
 		for (Repuesto repuesto : repuestos) {

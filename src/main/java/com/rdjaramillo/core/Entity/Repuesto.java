@@ -2,8 +2,10 @@ package com.rdjaramillo.core.Entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,17 +30,24 @@ public class Repuesto implements Serializable {
 	@OneToOne
 	private TipoProducto tpproductorepuestos;
 
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "fkrepuestoproducto", targetEntity = Producto.class)
+	private Producto producto;
+
+	
 	public long getIdrepuesto() {
 		return idrepuesto;
 	}
+
 
 	public void setIdrepuesto(long idrepuesto) {
 		this.idrepuesto = idrepuesto;
 	}
 
+
 	public String getNombrerepuesto() {
 		return nombrerepuesto;
 	}
+
 
 	public void setNombrerepuesto(String nombrerepuesto) {
 		this.nombrerepuesto = nombrerepuesto;
@@ -49,29 +58,37 @@ public class Repuesto implements Serializable {
 		return tpproductorepuestos;
 	}
 
+
 	public void setTpproductorepuestos(TipoProducto tpproductorepuestos) {
 		this.tpproductorepuestos = tpproductorepuestos;
 	}
+
+
+	public Producto getProducto() {
+		return producto;
+	}
+
+
+	public void setProducto(Producto producto) {
+		this.producto = producto;
+	}
+
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-	
 
-	public Repuesto() {	}
+	public Repuesto() {}
 
-	public Repuesto(long idrepuesto, String nombrerepuesto, TipoProducto tpproductorepuestos) {
+
+	public Repuesto(long idrepuesto, String nombrerepuesto, TipoProducto tpproductorepuestos, Producto producto) {
 		this.idrepuesto = idrepuesto;
 		this.nombrerepuesto = nombrerepuesto;
 		this.tpproductorepuestos = tpproductorepuestos;
+		this.producto = producto;
 	}
 
-	@Override
-	public String toString() {
-		return "Repuestos [idrepuesto=" + idrepuesto + ", nombrerepuesto=" + nombrerepuesto + ", tpproductorepuestos="
-				+ tpproductorepuestos + "]";
-	}
 
 	@Override
 	public int hashCode() {
@@ -79,9 +96,11 @@ public class Repuesto implements Serializable {
 		int result = 1;
 		result = prime * result + (int) (idrepuesto ^ (idrepuesto >>> 32));
 		result = prime * result + ((nombrerepuesto == null) ? 0 : nombrerepuesto.hashCode());
+		result = prime * result + ((producto == null) ? 0 : producto.hashCode());
 		result = prime * result + ((tpproductorepuestos == null) ? 0 : tpproductorepuestos.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -99,6 +118,11 @@ public class Repuesto implements Serializable {
 				return false;
 		} else if (!nombrerepuesto.equals(other.nombrerepuesto))
 			return false;
+		if (producto == null) {
+			if (other.producto != null)
+				return false;
+		} else if (!producto.equals(other.producto))
+			return false;
 		if (tpproductorepuestos == null) {
 			if (other.tpproductorepuestos != null)
 				return false;
@@ -106,6 +130,15 @@ public class Repuesto implements Serializable {
 			return false;
 		return true;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Repuesto [idrepuesto=" + idrepuesto + ", nombrerepuesto=" + nombrerepuesto + ", tpproductorepuestos="
+				+ tpproductorepuestos + ", producto=" + producto + "]";
+	}
+	
+	
 		
 	
 }

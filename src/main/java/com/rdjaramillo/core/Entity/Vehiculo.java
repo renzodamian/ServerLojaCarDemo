@@ -1,7 +1,9 @@
 package com.rdjaramillo.core.Entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,6 +31,10 @@ public class Vehiculo {
 	
 	@OneToOne
 	private TipoProducto tpproductovehiculo;
+
+	
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "fkvehiculoproducto", targetEntity = Producto.class)
+	private Producto producto;
 
 	public long getIdvehiculo() {
 		return idvehiculo;
@@ -88,13 +94,13 @@ public class Vehiculo {
 		this.tpproductovehiculo = tpproductovehiculo;
 	}
 
-	public Vehiculo() {
-	}
+	public Vehiculo() {}
 
 	@Override
 	public String toString() {
 		return "Vehiculo [idvehiculo=" + idvehiculo + ", marca=" + marca + ", modelo=" + modelo + ", anio=" + anio
-				+ ", cilindraje=" + cilindraje + ", tpproductovehiculo=" + tpproductovehiculo + "]";
+				+ ", cilindraje=" + cilindraje + ", tpproductovehiculo=" + tpproductovehiculo + ", producto=" + producto
+				+ "]";
 	}
 
 	@Override
@@ -106,6 +112,7 @@ public class Vehiculo {
 		result = prime * result + (int) (idvehiculo ^ (idvehiculo >>> 32));
 		result = prime * result + ((marca == null) ? 0 : marca.hashCode());
 		result = prime * result + ((modelo == null) ? 0 : modelo.hashCode());
+		result = prime * result + ((producto == null) ? 0 : producto.hashCode());
 		result = prime * result + ((tpproductovehiculo == null) ? 0 : tpproductovehiculo.hashCode());
 		return result;
 	}
@@ -141,6 +148,11 @@ public class Vehiculo {
 				return false;
 		} else if (!modelo.equals(other.modelo))
 			return false;
+		if (producto == null) {
+			if (other.producto != null)
+				return false;
+		} else if (!producto.equals(other.producto))
+			return false;
 		if (tpproductovehiculo == null) {
 			if (other.tpproductovehiculo != null)
 				return false;
@@ -148,5 +160,7 @@ public class Vehiculo {
 			return false;
 		return true;
 	}
+
+	
 	
 }

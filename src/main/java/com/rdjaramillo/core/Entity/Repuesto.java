@@ -1,5 +1,5 @@
 package com.rdjaramillo.core.Entity;
-
+/*
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
@@ -16,79 +16,67 @@ import javax.persistence.Table;
 @Table(name="repuesto")
 public class Repuesto implements Serializable {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idrepuesto;
 	
 	@Column(name="nombrerepuesto", length=350)
 	private String nombrerepuesto;
 	
-	@OneToOne
-	private TipoProducto tpproductorepuestos;
-
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "fkrepuestoproducto", targetEntity = Producto.class)
-	private Producto producto;
-
 	
+	 @OneToOne(fetch = FetchType.LAZY,
+	            cascade =  CascadeType.ALL,
+	            mappedBy = "tipoproducto_id")
+	    private TipoProducto tipoproductorepuesto;
+
+	 
+	public Repuesto() {
+		super();
+	}
+
+	public Repuesto(long idrepuesto, String nombrerepuesto, TipoProducto tipoproductorepuesto) {
+		super();
+		this.idrepuesto = idrepuesto;
+		this.nombrerepuesto = nombrerepuesto;
+		this.tipoproductorepuesto = tipoproductorepuesto;
+	}
+	
+
 	public long getIdrepuesto() {
 		return idrepuesto;
 	}
-
 
 	public void setIdrepuesto(long idrepuesto) {
 		this.idrepuesto = idrepuesto;
 	}
 
-
 	public String getNombrerepuesto() {
 		return nombrerepuesto;
 	}
-
 
 	public void setNombrerepuesto(String nombrerepuesto) {
 		this.nombrerepuesto = nombrerepuesto;
 	}
 
-
-	public TipoProducto getTpproductorepuestos() {
-		return tpproductorepuestos;
+	public TipoProducto getTipoproductorepuesto() {
+		return tipoproductorepuesto;
 	}
 
-
-	public void setTpproductorepuestos(TipoProducto tpproductorepuestos) {
-		this.tpproductorepuestos = tpproductorepuestos;
+	public void setTipoproductorepuesto(TipoProducto tipoproductorepuesto) {
+		this.tipoproductorepuesto = tipoproductorepuesto;
 	}
-
-
-	public Producto getProducto() {
-		return producto;
-	}
-
-
-	public void setProducto(Producto producto) {
-		this.producto = producto;
-	}
-
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-
-	public Repuesto() {}
-
-
-	public Repuesto(long idrepuesto, String nombrerepuesto, TipoProducto tpproductorepuestos, Producto producto) {
-		this.idrepuesto = idrepuesto;
-		this.nombrerepuesto = nombrerepuesto;
-		this.tpproductorepuestos = tpproductorepuestos;
-		this.producto = producto;
+	@Override
+	public String toString() {
+		return "Repuesto [idrepuesto=" + idrepuesto + ", nombrerepuesto=" + nombrerepuesto + ", tipoproductorepuesto="
+				+ tipoproductorepuesto + "]";
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -96,11 +84,9 @@ public class Repuesto implements Serializable {
 		int result = 1;
 		result = prime * result + (int) (idrepuesto ^ (idrepuesto >>> 32));
 		result = prime * result + ((nombrerepuesto == null) ? 0 : nombrerepuesto.hashCode());
-		result = prime * result + ((producto == null) ? 0 : producto.hashCode());
-		result = prime * result + ((tpproductorepuestos == null) ? 0 : tpproductorepuestos.hashCode());
+		result = prime * result + ((tipoproductorepuesto == null) ? 0 : tipoproductorepuesto.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -118,27 +104,13 @@ public class Repuesto implements Serializable {
 				return false;
 		} else if (!nombrerepuesto.equals(other.nombrerepuesto))
 			return false;
-		if (producto == null) {
-			if (other.producto != null)
+		if (tipoproductorepuesto == null) {
+			if (other.tipoproductorepuesto != null)
 				return false;
-		} else if (!producto.equals(other.producto))
-			return false;
-		if (tpproductorepuestos == null) {
-			if (other.tpproductorepuestos != null)
-				return false;
-		} else if (!tpproductorepuestos.equals(other.tpproductorepuestos))
+		} else if (!tipoproductorepuesto.equals(other.tipoproductorepuesto))
 			return false;
 		return true;
 	}
-
-
-	@Override
-	public String toString() {
-		return "Repuesto [idrepuesto=" + idrepuesto + ", nombrerepuesto=" + nombrerepuesto + ", tpproductorepuestos="
-				+ tpproductorepuestos + ", producto=" + producto + "]";
-	}
 	
 	
-		
-	
-}
+}*/

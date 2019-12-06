@@ -1,7 +1,7 @@
 package com.rdjaramillo.core.Controller;
 
 
-
+/*
 import java.util.List;
 
 import javax.validation.Valid;
@@ -50,3 +50,4 @@ public class VehiculoController {
 		return serviciovehiculo.obtener();
 	}
 }
+*/

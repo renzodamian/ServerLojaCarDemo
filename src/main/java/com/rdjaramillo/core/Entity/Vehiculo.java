@@ -1,12 +1,12 @@
 package com.rdjaramillo.core.Entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Table(name="vehiculo")
 public class Vehiculo {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idvehiculo;
 	
 	@Column(name="marca", length=350)
@@ -29,12 +29,31 @@ public class Vehiculo {
 	@Column(name="cilindraje", length=350)
 	private String cilindraje;
 	
-	@OneToOne
+	/*@OneToOne(cascade=CascadeType.ALL)
 	private TipoProducto tpproductovehiculo;
-
+	
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "fkvehiculoproducto", targetEntity = Producto.class)
-	private Producto producto;
+	private Producto producto;*/
+	
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "tipoproducto_id", nullable = false)
+	private TipoProducto tipoproductovehiculo;
+	
+	public Vehiculo() {
+		super();
+	}
+
+	public Vehiculo(long idvehiculo, String marca, String modelo, String anio, String cilindraje,
+			TipoProducto tipoproductovehiculo) {
+		super();
+		this.idvehiculo = idvehiculo;
+		this.marca = marca;
+		this.modelo = modelo;
+		this.anio = anio;
+		this.cilindraje = cilindraje;
+		this.tipoproductovehiculo = tipoproductovehiculo;
+	}
 
 	public long getIdvehiculo() {
 		return idvehiculo;
@@ -76,31 +95,18 @@ public class Vehiculo {
 		this.cilindraje = cilindraje;
 	}
 
-	public TipoProducto getTpproductovehiculo() {
-		return tpproductovehiculo;
+	public TipoProducto getTipoproductovehiculo() {
+		return tipoproductovehiculo;
 	}
 
-	public void setTpproductovehiculo(TipoProducto tpproductovehiculo) {
-		this.tpproductovehiculo = tpproductovehiculo;
+	public void setTipoproductovehiculo(TipoProducto tipoproductovehiculo) {
+		this.tipoproductovehiculo = tipoproductovehiculo;
 	}
-
-	public Vehiculo(long idvehiculo, String marca, String modelo, String anio, String cilindraje,
-			TipoProducto tpproductovehiculo) {
-		this.idvehiculo = idvehiculo;
-		this.marca = marca;
-		this.modelo = modelo;
-		this.anio = anio;
-		this.cilindraje = cilindraje;
-		this.tpproductovehiculo = tpproductovehiculo;
-	}
-
-	public Vehiculo() {}
 
 	@Override
 	public String toString() {
 		return "Vehiculo [idvehiculo=" + idvehiculo + ", marca=" + marca + ", modelo=" + modelo + ", anio=" + anio
-				+ ", cilindraje=" + cilindraje + ", tpproductovehiculo=" + tpproductovehiculo + ", producto=" + producto
-				+ "]";
+				+ ", cilindraje=" + cilindraje + ", tipoproductovehiculo=" + tipoproductovehiculo + "]";
 	}
 
 	@Override
@@ -112,8 +118,7 @@ public class Vehiculo {
 		result = prime * result + (int) (idvehiculo ^ (idvehiculo >>> 32));
 		result = prime * result + ((marca == null) ? 0 : marca.hashCode());
 		result = prime * result + ((modelo == null) ? 0 : modelo.hashCode());
-		result = prime * result + ((producto == null) ? 0 : producto.hashCode());
-		result = prime * result + ((tpproductovehiculo == null) ? 0 : tpproductovehiculo.hashCode());
+		result = prime * result + ((tipoproductovehiculo == null) ? 0 : tipoproductovehiculo.hashCode());
 		return result;
 	}
 
@@ -148,19 +153,15 @@ public class Vehiculo {
 				return false;
 		} else if (!modelo.equals(other.modelo))
 			return false;
-		if (producto == null) {
-			if (other.producto != null)
+		if (tipoproductovehiculo == null) {
+			if (other.tipoproductovehiculo != null)
 				return false;
-		} else if (!producto.equals(other.producto))
-			return false;
-		if (tpproductovehiculo == null) {
-			if (other.tpproductovehiculo != null)
-				return false;
-		} else if (!tpproductovehiculo.equals(other.tpproductovehiculo))
+		} else if (!tipoproductovehiculo.equals(other.tipoproductovehiculo))
 			return false;
 		return true;
 	}
-
-	
+	   
+	   
 	
 }
+

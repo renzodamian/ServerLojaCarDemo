@@ -1,5 +1,5 @@
 package com.rdjaramillo.core.Controller;
-
+/*
 import java.util.List;
 
 import javax.validation.Valid;
@@ -50,4 +50,4 @@ public class RepuestoController {
 		return serviciorepuesto.obtener();
 	}
 
-}
+}*/
